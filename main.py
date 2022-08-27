@@ -63,7 +63,7 @@ def sendMessage(big_info,startday,timetable,qqun):
         today = datetime.datetime.now()
         # 计算时间差
         delta = today - datetime.datetime.strptime(startday, "%Y-%m-%d")
-        nowweek = (delta.days + 1) % 7
+        nowweek = (delta.days) // 7 + 1
         nowtime = datetime.datetime.strftime(today, "%H:%M")
         for i in timetable:
             if i == nowtime:
@@ -93,6 +93,7 @@ def sendMessage(big_info,startday,timetable,qqun):
                             text += text2 + classtext + "\n"
                         elif hasClass == 0:
                             text += text0 + "\n"
+                            text += "注：由于英语和体育课的特殊性，仅上课时间相同，上课位置及教师请自行确认" # hgu特殊
                     url = "http://localhost:5700/send_group_msg"
                     content = {
                         "group_id": qqun,
